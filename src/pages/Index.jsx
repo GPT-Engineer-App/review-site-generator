@@ -34,9 +34,14 @@ const Index = () => {
         <Input placeholder="Search reviews..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         <Box display="flex" flexDirection="column" gap={4}>
           {filteredReviews.map((review) => (
-            <Box key={review.id} p={4} shadow="md" borderWidth="1px" borderRadius="md" cursor="pointer" onClick={() => alert(`Title: ${review.title}\nContent: ${review.content}\nProduct: ${review.productTitle}\nCategory: ${review.category}\nRating: ${review.rating}`)}>
+            <Box key={review.id} p={4} shadow="md" borderWidth="1px" borderRadius="md" cursor="pointer" onClick={() => navigate(`/review/${review.id}`, { state: { review } })}>
               <Text fontWeight="bold">
-                {review.productTitle} - {review.category} ({review.rating}/5)
+                {review.productTitle} - {review.category}
+              </Text>
+              <Text>
+                {Array.from({ length: review.rating }, (_, i) => (
+                  <FaStar key={i} color="yellow" />
+                ))}
               </Text>
               <Text fontSize="sm">{review.title}</Text>
             </Box>
